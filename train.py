@@ -1,6 +1,7 @@
 import hydra
 from omegaconf import DictConfig
 
+import phasenet
 from popgen.setup import setup_worker, setup_loaders
 
 
@@ -13,11 +14,11 @@ def train(cfg: DictConfig) -> None:
 
     # setup the worker
     overwrite = cfg.get("overwrite", False)
-    worker, cfg = setup_worker(name, cfg, overwrite=overwrite)
+    worker, cfg = setup_worker(name, cfg, overwrite=overwrite, module=phasenet)
 
     # setup data loaders
     train_loader, test_loader = setup_loaders(
-        dataset_class=cfg["dataset_class"], data_opts=cfg["dataset"], loader_opts=cfg["loader"]
+        dataset_class=cfg["dataset_class"], data_opts=cfg["dataset"], loader_opts=cfg["loader"], module=phasenet
     )
 
     # train

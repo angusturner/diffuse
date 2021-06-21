@@ -1,0 +1,16 @@
+worker_class: CFRVAEWorker
+worker:
+  max_beta: 1
+  annealing_temp: 1e-4
+  epoch_save_freq: 50
+  log_interval: 50
+  optim_class: Adam
+  target_bits: 16
+  target_cutoff: 0.98
+  use_analytic_kl: true
+  geco_opts:
+    prop: 5e-6
+    initial_lagrange: 0.005
+  optim_settings:
+    lr: 1e-4
+    weight_decay: 0.
