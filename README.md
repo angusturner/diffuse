@@ -1,3 +1,3 @@
-# PhaseNet
+# Diffusion Experiments
 
-Circular normalising flows for neural vocoding / phase estimation.
+...
