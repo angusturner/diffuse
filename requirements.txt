@@ -1,14 +1,17 @@
 # popgen dependency
 # -e git+git://github.com/Popgun-Labs/PopGen.git#popgen
 
-torch>=1.4
+# note: for GPU version, install via conda
+#
+# torch>=1.9
+# torchvision~=0.9.1
+
 tqdm>=4.46.0
 numpy>=1.16.1
 seaborn
 hydra-core==0.11.3
 wandb~=0.10.21
-flake8
-autopep8
-prompt_toolkit>=3.0.5
 omegaconf==1.4.1
 black~=19.10b0
+setuptools~=50.3.2
+popgen~=0.0.2

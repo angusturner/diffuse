@@ -5,13 +5,8 @@ dataset:
     sr: 16000
 
   train:
-#    paths: ['/home/angusturner/data/datasets/vctk_16k/train']
-    # paths: ['/home/ubuntu/data_disk/known_speakers/']
-    paths: ['/home/angusturner/storage/known_speakers/train']
+    paths: ['/home/angusturner/datasets/vctk_16k/train']
     patch_size: 16000
-
   test:
-    # paths: ['/home/ubuntu/data_disk/vctk_16k/test']
-#    paths: ['/home/angusturner/data/datasets/vctk_16k/test']
-    paths: ['/home/angusturner/storage/known_speakers/test']
+    paths: ['/home/angusturner/datasets/vctk_16k/test']
     patch_size: 16000
