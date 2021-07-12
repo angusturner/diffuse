@@ -24,4 +24,4 @@ Recommended:
 pip install -r requirements.txt
 ```
 
-Uses the [PopGen](#https://github.com/Popgun-Labs/PopGen) framework to manage experiments.
+Uses the [PopGen](https://github.com/Popgun-Labs/PopGen) framework to manage experiments.
