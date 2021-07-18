@@ -6,7 +6,7 @@ loader:
     num_workers: 1
     pin_memory: false
     shuffle: true
-    batch_size: 32
+    batch_size: 100
   # specific settings
   train:
     drop_last: true

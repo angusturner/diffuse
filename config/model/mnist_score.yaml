@@ -1,6 +1,6 @@
 model_class: MnistScore
 model:
     nb_timesteps: 250
-    hidden: 64
+    hidden: 128
     c_dim: 64
     input_dim: 1

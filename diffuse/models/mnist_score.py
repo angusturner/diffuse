@@ -31,7 +31,9 @@ class MnistScore(nn.Module):
         # define the main convolution op.
         op = partial(ConvGLU, c_dim=c_dim, kw=3)
 
-        self.init = nn.Conv2d(input_dim, hidden, 3, padding=1)
+        self.init1 = nn.Conv2d(input_dim, hidden, 3, padding=1)
+        self.init2 = op(hidden)
+
         self.down1 = DownsampleBlock(hidden, op)  # 14x14
         self.down2 = DownsampleBlock(hidden * 2, op)  # 7x7
         self.up1 = UpsampleBlock(hidden * 4, op)  # 14x14
@@ -50,11 +52,14 @@ class MnistScore(nn.Module):
         c = self.diff_embedding[t]  # (batch, c_dim)
 
         # initial channel up-sampling
-        x1 = self.init(x)
+        x1 = self.init1(x)
+        x1 = self.init2(x1)
+
+        # u-net
         x2 = self.down1(x1, c)
         x3 = self.down2(x2, c)
         x = self.up1(x3, x2, c)
         x = self.up2(x, x1, c)
-        out = self.out(x)
 
-        return out
+        # output
+        return self.out(x)
