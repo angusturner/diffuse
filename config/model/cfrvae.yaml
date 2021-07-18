@@ -1,9 +1,0 @@
-model_class: CFRVAE
-model:
-    input_features: 200
-    output_features: 200
-    latent_features: 32
-    hidden_features: 512
-    prior_hidden: 512
-    prior_nb_layers: 2
-    zoneout_p: 0

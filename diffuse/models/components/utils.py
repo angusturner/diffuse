@@ -3,7 +3,7 @@ from typing import Tuple
 import torch
 
 
-def unsqueeze_as(x: torch.Tensor, shape: Tuple[int]) -> torch.Tensor:
+def unsqueeze_as(x: torch.Tensor, shape: Tuple[..., int]) -> torch.Tensor:
     """
     Add trailing dimensions onto `x` until it matches the rank of a second
     tensor whose shape is given.

@@ -1,0 +1,4 @@
+dataset_class: MNIST
+dataset:
+  both:
+    data_dir: "/home/angusturner/datasets/"
