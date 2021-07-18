@@ -4,6 +4,7 @@ worker:
     nb_timesteps: 200
     start: 1e-4
     end: 0.05
+  optim_class: Adam
   optim_settings:
     lr: 2e-4
     weight_decay: 0.

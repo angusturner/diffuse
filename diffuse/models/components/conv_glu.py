@@ -3,11 +3,10 @@ import torch.nn as nn
 
 
 class ConvGLU(nn.Module):
-    def __init__(self, in_channels, out_channels, c_dim=None, dilation=1, kw=3):
+    def __init__(self, channels, c_dim=None, dilation=1, kw=3):
         """
         Convolution with GLU activation and (optional) global conditioning
-        :param in_channels:
-        :param out_channels:
+        :param channels
         :param c_dim:
         :param dilation:
         :param kw:
@@ -15,17 +14,17 @@ class ConvGLU(nn.Module):
         super().__init__()
 
         # TODO: try without batch-norm?
-        self.bn = nn.BatchNorm2d(in_channels)
+        self.bn = nn.BatchNorm2d(channels)
 
         # main op. + parameterised residual connection
         padding = (kw - 1) * dilation // 2
-        self.conv = nn.Conv2d(in_channels, out_channels, kernel_size=kw, dilation=dilation, padding=padding)
-        self.up1x1 = nn.Conv2d(out_channels // 2, out_channels, 1)
+        self.conv = nn.Conv2d(channels, channels, kernel_size=kw, dilation=dilation, padding=padding)
+        self.up1x1 = nn.Conv2d(channels // 2, channels, 1)
 
         self.rescale = 0.5 ** 0.5
 
         if c_dim is not None:
-            self.c_proj = nn.Linear(c_dim, out_channels)
+            self.c_proj = nn.Linear(c_dim, channels)
 
     def forward(self, x, c=None):
         """

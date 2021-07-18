@@ -55,6 +55,7 @@ class MnistWorker(AbstractWorker):
 
         # put everything on GPU if available
         if torch.cuda.is_available():
+            self.diffusion.cuda()
             self.cuda()
 
         # track the number of iterations
@@ -91,10 +92,11 @@ class MnistWorker(AbstractWorker):
             if train:
                 loss.backward()
                 self.optim.step()
-            else:
-                self._plot_sample()
 
             self._plot_loss({"MSE": loss.item()}, train=train)
+
+            if i % 500 == 0 and not self.train:
+                self._plot_sample()
 
         return (np.mean(losses),)
 

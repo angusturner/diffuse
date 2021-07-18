@@ -13,7 +13,7 @@ class DownsampleBlock(nn.Module):
         super(DownsampleBlock, self).__init__()
 
         self.down = nn.Conv2d(hidden, hidden * 2, kernel_size=2, stride=2)
-        self.conv = main_op(hidden, hidden * 2)
+        self.conv = main_op(hidden * 2)
 
     def forward(self, x, c=None):
         down = self.down(x)
@@ -25,9 +25,11 @@ class UpsampleBlock(nn.Module):
         super(UpsampleBlock, self).__init__()
 
         self.up = nn.ConvTranspose2d(hidden, hidden // 2, kernel_size=2, stride=2)
-        self.main = main_op(hidden, hidden)
+        self.conv1 = nn.Conv2d(hidden, hidden // 2, 1)
+        self.main = main_op(hidden // 2)
 
     def forward(self, x1, x2, c=None):
         x1 = self.up(x1)
         feats = torch.cat((x1, x2), dim=1)
+        feats = self.conv1(feats)
         return self.main(feats, c)

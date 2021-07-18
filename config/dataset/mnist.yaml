@@ -2,3 +2,7 @@ dataset_class: MNIST
 dataset:
   both:
     data_dir: "/home/angusturner/datasets/"
+  train:
+    train: true
+  test:
+    train: false
