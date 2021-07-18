@@ -3,7 +3,7 @@
 loader:
   # settings for both train and validation
   both:
-    num_workers: 4
+    num_workers: 1
     pin_memory: false
     shuffle: true
     batch_size: 32
@@ -11,4 +11,4 @@ loader:
   train:
     drop_last: true
   test:
-    drop_last: true
+    drop_last: false

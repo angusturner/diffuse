@@ -2,9 +2,8 @@
 # -e git+git://github.com/Popgun-Labs/PopGen.git#popgen
 
 # note: for GPU version, install via conda
-#
-# torch>=1.9
-# torchvision~=0.9.1
+torch>=1.9
+torchvision~=0.9.1
 
 tqdm>=4.46.0
 numpy>=1.16.1

@@ -1,1 +1,2 @@
-from .test_model import TestModel
+from .mnist_score import MnistScore
+from .diffusion_process import DiffusionProcess
