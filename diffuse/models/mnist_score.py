@@ -42,8 +42,6 @@ class MnistScore(nn.Module):
     def forward(self, x, t):
         """
         Produces an estimate for the noise term `epsilon`.
-        Can equivalently be thought of as a learned gradient or "score function" estimator,
-        as part of a Langevin sampling procedure.
         :param x: (batch, 1, H, W) torch.float
         :param t: (batch) torch.int
         """
@@ -52,35 +50,11 @@ class MnistScore(nn.Module):
         c = self.diff_embedding[t]  # (batch, c_dim)
 
         # initial channel up-sampling
-        x = self.init(x)
-        
-
-        # 28x28
-        out, skip = self.l1(out, skip, c)
-        out_half, skip_half = self.down1(out, skip)
-
-        # 14x14
-        out_half, skip_half = self.l2(out_half, skip_half, c)
-        out_quart, skip_quart = self.down2(out_half, skip_half)
-
-        # 7x7
-        out_quart, skip_quart = self.l3(out_quart, skip_quart, c)
-        out_quart, skip_quart = self.l4(out_quart, skip_quart, c)
-
-        # back to 14x14
-        out_half_, skip_half_ = self.up1(out_quart, skip_quart)
-        out_half = self.rescale * (out_half + out_half_)
-        skip_half = self.rescale * (skip_half + skip_half_)
-
-        # 14x14
-        out_half, skip_half = self.l5(out_half, skip_half)
-
-        # back to 28x28
-        out_, skip_ = self.up2(out_half, skip_half)
-        out = self.rescale * (out + out_)
-        skip = self.rescale * (skip + skip_)
-
-        out, skip = self.l6(out, skip, c)
-        out = self.out(skip)
+        x1 = self.init(x, c)
+        x2 = self.down1(x1, c)
+        x3 = self.down2(x2, c)
+        x = self.up1(x3, x2, c)
+        x = self.up2(x, x1, c)
+        out = self.out(x)
 
         return out
