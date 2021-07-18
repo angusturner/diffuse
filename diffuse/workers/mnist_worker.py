@@ -95,7 +95,7 @@ class MnistWorker(AbstractWorker):
 
             self._plot_loss({"MSE": loss.item()}, train=train)
 
-            if i % 500 == 0 and not self.train:
+            if i % 500 == 0 and not train:
                 self._plot_sample()
 
         return (np.mean(losses),)
